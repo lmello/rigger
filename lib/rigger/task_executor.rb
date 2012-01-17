@@ -76,6 +76,20 @@ module Rigger
       end
     end
 
+    def capture_all(command)
+      {:stdout => "", :stderr => ""}.tap do |captured|
+        execute(command, [@current_servers.first]) do |ch|
+          ch.on_data do |c, data|
+            captured[:stdout] << data
+          end
+
+          ch.on_extended_data do |c, type, data|
+            captured[:stderr] << data
+          end
+        end
+      end
+    end
+
     def run_task(task_name)
       @execution_service.call(task_name)
     end
