@@ -90,6 +90,18 @@ module Rigger
       end
     end
 
+    def erl_call(cookie, node, code)
+      streams = capture_all("echo '#{code}' | erl_call -e -c #{cookie} -n #{node}")
+
+      if !streams[:stderr].empty?
+        raise CommandError, "erl_call #{code} failed on #{@current_servers.first.connection_string}: #{streams[:stderr]}"
+      end
+
+      if !streams[:stdout].include?('{ok,')
+        raise CommandError, "erl_call #{code} failed on #{@current_servers.first.connection_string}: #{streams[:stdout]}"
+      end
+    end
+
     def run_task(task_name)
       @execution_service.call(task_name)
     end
