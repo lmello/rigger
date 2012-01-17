@@ -45,14 +45,14 @@ module Rigger
       execute(command, @current_servers) do |ch|
         ch.on_data do |c, data|
           data.split("\n").each do |line|
-            puts " ** [#{ch[:host]} :: stdout] #{line}"
+            $stdout.puts" ** [#{ch[:host]} :: stdout] #{line}"
             $stdout.flush
           end
         end
 
         ch.on_extended_data do |c, type, data|
           data.split("\n").each do |line|
-            puts " ** [#{ch[:host]} :: stderr] #{line}"
+            $stderr.puts" ** [#{ch[:host]} :: stderr] #{line}"
             $stderr.flush
           end
         end
@@ -68,7 +68,7 @@ module Rigger
 
           ch.on_extended_data do |c, type, data|
             data.split("\n").each do |line|
-              puts " ** [#{server.connection_string} :: stderr] #{line}"
+              $stderr.puts " ** [#{server.connection_string} :: stderr] #{line}"
               $stderr.flush
             end
           end
@@ -84,11 +84,13 @@ module Rigger
       puts "  * executing `#{command}` locally"
       status = POpen4.popen4(command) do |stdout, stderr, stdin, pid|
         stdout.each_line do |line|
-          puts " ** [locally :: stdout] #{line}"
+          $stdout.puts " ** [locally :: stdout] #{line}"
+          $stdout.flush
         end
 
         stderr.each_line do |line|
-          puts " ** [locally :: stderr] #{line}"
+          $stderr.puts " ** [locally :: stderr] #{line}"
+          $stderr.flush
         end
       end
 
