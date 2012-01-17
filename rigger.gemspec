@@ -4,19 +4,17 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{rigger}
-  s.version = "0.2.10"
+  s.name = "rigger"
+  s.version = "0.2.11"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["James Golick"]
-  s.date = %q{2011-06-21}
-  s.default_executable = %q{rig}
-  s.description = %q{}
-  s.email = %q{jamesgolick@gmail.com}
+  s.date = "2012-01-17"
+  s.description = ""
+  s.email = "jamesgolick@gmail.com"
   s.executables = ["rig"]
   s.extra_rdoc_files = [
     "LICENSE.txt",
-    "README.rdoc",
     "TODO"
   ]
   s.files = [
@@ -25,7 +23,6 @@ Gem::Specification.new do |s|
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
-    "README.rdoc",
     "Rakefile",
     "TODO",
     "VERSION",
@@ -45,14 +42,16 @@ Gem::Specification.new do |s|
     "lib/rigger/task.rb",
     "lib/rigger/task_execution_service.rb",
     "lib/rigger/task_executor.rb",
+    "readme.md",
+    "rigger.gemspec",
     "spec/server_resolver_spec.rb",
     "spec/spec_helper.rb"
   ]
-  s.homepage = %q{http://github.com/jamesgolick/rigger}
+  s.homepage = "http://github.com/jamesgolick/rigger"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.9.2}
-  s.summary = %q{}
+  s.rubygems_version = "1.8.10"
+  s.summary = ""
   s.test_files = [
     "spec/server_resolver_spec.rb",
     "spec/spec_helper.rb"
