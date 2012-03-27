@@ -68,7 +68,7 @@ module Rigger
 
           ch.on_extended_data do |c, type, data|
             data.split("\n").each do |line|
-              $stderr.puts " ** [#{server.connection_string} :: stderr] #{line}"
+              $stderr.puts " ** [#{@current_servers.first.connection_string} :: stderr] #{line}"
               $stderr.flush
             end
           end
