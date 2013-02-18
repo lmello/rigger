@@ -90,6 +90,23 @@ module Rigger
       end
     end
 
+    def capture_all_servers(command)
+      {}.tap do |captured|
+        execute(command, @current_servers) do |ch|
+          ch.on_data do |c, data|
+            captured[c[:host]] = data 
+          end
+
+          ch.on_extended_data do |c, type, data|
+            data.split("\n").each do |line|
+              $stderr.puts " ** [#{ch[:host]} :: stderr] #{line}"
+              $stderr.flush
+            end
+          end
+        end
+      end
+    end
+
     def erl_call(cookie, node, code)
       streams = capture_all("echo '#{code}' | erl_call -e -c #{cookie} -n #{node}")
 
